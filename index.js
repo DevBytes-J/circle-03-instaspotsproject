@@ -49,17 +49,22 @@ const currentName = document.querySelector(".profile__name").textContent;
 const currentBio = document.querySelector(".profile__bio").textContent;
 const currentImage = document.querySelector(".profile__avatar-image");
 
-// Open modal
+// Open modal (add focus management)
 editBtn.addEventListener("click", function () {
   modal.style.display = "block";
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-label", "Edit Profile");
   // Populate form with current data
+  profileName.focus();
   profileName.value = currentName;
   profileBio.value = currentBio;
 });
 
-// Close modal functions
+// Close modal functions (return foucs)
 function closeModal() {
   modal.style.display = "none";
+  editBtn.focus();
 }
 
 closeBtn.addEventListener("click", closeModal);
@@ -92,7 +97,7 @@ profileForm.addEventListener("submit", function (e) {
 
   closeModal();
 });
-// DisplayCard function itierating over each card data
+// DisplayCard function: add accessibility to icons
 function displayCard(cards) {
   cardsContainer.innerHTML = ``;
   if (cards.length > 0) {
@@ -103,7 +108,10 @@ function displayCard(cards) {
                 <img class="card__image" src="${card.image} "alt="${card.name}"/>
                 <div class="card__content">
                     <p class="card__text">${card.text}</p>
-                    <img class="card__icon" src="./assets/images/Union.svg" alt="love icon" />
+                    <div class="card__icon-container">
+                        <svg class="card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg> </div>
                 </div>
             `;
       cardsContainer.append(cardsItem);
@@ -112,9 +120,36 @@ function displayCard(cards) {
 }
 displayCard(cards);
 
-    const closeImgBtn = document.querySelector(
-      ".imgModal .imageModal__content .modal__close"
-    );
+
+// after rendering cards, add keyboard and ARIA support
+function functionalLikeButton () {
+    document.querySelectorAll('.card__icon').forEach(icon => {
+      icon.addEventListener('click', function (e) {
+        e.stopPropagation(); // Prevent card click event from firing
+        this.classList.toggle('card__icon--active');
+        
+        // toggle aria-pressed
+        this.setAttribute('aria-pressed', this.classList.contains('card__icon--active'));
+        this.classList.add('card__icon--animate');
+        
+        // Remove animation class after animation completes
+        setTimeout(() => {
+          this.classList.remove('card__icon--animate');
+        }, 300);
+      });
+    });
+}
+
+functionalLikeButton();
+
+
+
+//Cards Modal
+// const cardElements = document.querySelectorAll(".card");
+
+const closeImgBtn = document.querySelector(
+  ".imgModal .imageModal__content .modal__close"
+);
 
 function setupCardPreviewModalListeners() {
     //Cards Modal
@@ -278,10 +313,10 @@ newPostForm.addEventListener("submit", (e) => {
     text: titleInput.value,
     name: titleInput.value,
   };
-  cards.unshift(newCard);
-  displayCard(cards);
-  setupCardPreviewModalListeners()
-
+    cards.unshift(newCard);
+    displayCard(cards);
+    setupCardPreviewModalListeners()
+    functionalLikeButton();
   newPostModal.close();
   newPostForm.reset();
   preview.innerHTML = "";

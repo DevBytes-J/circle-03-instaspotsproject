@@ -144,8 +144,8 @@ main section {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 20px;
-  row-gap: 50px;
+  column-gap: 25px;
+  row-gap: 30px;
   padding: 1.5rem 3.5rem;
 }
 
@@ -747,5 +747,45 @@ dialog::backdrop {
   }
   .modal__text {
     width: 100%;
+  }
+}
+
+/* heart icon styling  */
+.card__icon-container {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__icon {
+  width: 30px;
+  height: 30px;
+  transition: all 0.3s ease;
+  color: #000;
+  fill: none;
+}
+
+.card__icon--active {
+  color: #ed4956;
+  fill: #ed4956;
+  transform: scale(1.1);
+  background: none;
+}
+
+.card__icon--animate {
+  animation: heartBeat 0.3s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1.1);
   }
 }

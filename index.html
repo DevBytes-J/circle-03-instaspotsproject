@@ -43,91 +43,109 @@
                     <p class="profile__bio">Known mononymously as Akon (/ˈeɪkɒn/), is a Senegalese-American singer, record producer, and
                         entrepreneur. An influential figure in modern world...</p>
                 </div>
-
-            <!-- Hero Actions Section -->
-                <div class="profile__actions">
-                    <!-- Edit Profile Button Section -->
-                    <button id="profile__edit-btn" class="profile__edit-btn">
-                    <span><i class="fa-solid fa-pencil"></i></span>
-                    Edit Profile
+                <!-- Hero Actions Section -->
+                <div class="profile__actions"
+                role="toolbar" aria-label="profile actions">
+                <!-- Edit Profile Button Section -->
+                    <button id="profile__edit-btn" class="profile__edit-btn" aria-label="edit profile">
+                        <span><i class="fa-solid fa-pencil"></i></span>
+                        Edit Profile
                     </button>
                     <!-- New Post Button Section -->
-                    <button class="profile__newpost-btn"
-                                id="profile__newpost-btn"
-                                type="button"
-                                >
-                    <span
-                        ><img src="./assets/images/Group 26.svg" alt="New Post Icon"
-                    /></span>
-                    New Post
+                    <button class="profile__newpost-btn" id="profile__newpost-btn" type="button">
+                        <span><img src="./assets/images/Group 26.svg" alt="New Post Icon"></span>
+                        New Post
                     </button>
                 </div>
             </article>
-      </section>
-
-      <!-- section break -->
-      <hr class="horizontal-line wrapper" />
-
-      <!-- Main Section -->
-      <main class="main wrapper">
-        <section class="cards">
-          <!--List of Posted Cards-->
         </section>
-      </main>
 
-      <!-- section break -->
-      <hr class="horizontal-line wrapper" />
-      <!-- Footer Section -->
-      <footer class="footer wrapper">
-        <p class="footer__copyright">2024 &#169; Spots</p>
-      </footer>
+        <!-- section break -->
+        <hr class="horizontal-line wrapper">
+        
+        <!-- Main Section -->
+        <main class="main wrapper">
+            <section class="cards">
+                <!--List of Posted Cards-->
+            </section>
+        </main>
+
+        <!-- section break -->
+        <hr class="horizontal-line wrapper" />
+        <!--Main Page Footer Section -->
+        <footer class="footer wrapper">
+            <p class="footer__copyright">2024 &#169; Spots</p>
+        </footer>
     </div>
 
-    <!-- Profile Edit Modal -->
-    <dialog id="profileModal" class="modal">
-      <div class="modal__content" role="document">
-        <header class="modal__header">
-          <h2 id="modalTitle">Edit Profile</h2>
-          <button type="button" class="modal__close">&times;</button>
-        </header>
+        <!-- Profile Edit Modal -->
+        <dialog id="profileModal" class="modal">
+            <div class="modal__content" role="document">
+                <header class="modal__header">
+                    <h2 id="modalTitle">Edit Profile</h2>
+                    <button type="button" class="modal__close" aria-label="close">&times;</button>
+                </header>
+               
+                <form id="profileForm" class="modal__form">
+                    <div class="modal__form-group">
+                        <label for="profileName">Name:</label>
+                        <input type="text" id="profileName" name="profileName" minlength="3" maxlength="200" required>
+                    </div>
+                    <div class="modal__form-group">
+                        <label for="profileBio">Bio:</label>
+                        <textarea id="profileBio" name="profileBio" rows="4" required></textarea>
+                    </div>
+                    <div class="modal__form-group">
+                        <label for="profileImage">Profile Image:</label>
+                        <input type="file" id="profileImage" name="profileImage" accept="image/*">
+                    </div>
+                    <footer class="modal__actions">
+                        <button type="submit" class="modal__save-btn">Save Changes</button>
+                        <button type="button" class="modal__cancel-btn">Cancel</button>
+                    </footer>
+                </form>
+            </div>
+        </dialog>
 
-        <form id="profileForm" class="modal__form">
-          <div class="modal__form-group">
-            <label for="profileName">Name:</label>
-            <input
-              type="text"
-              id="profileName"
-              name="profileName"
-              minlength="3"
-              maxlength="200"
-              required
-            />
-          </div>
-          <div class="modal__form-group">
-            <label for="profileBio">Bio:</label>
-            <textarea
-              id="profileBio"
-              name="profileBio"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-          <div class="modal__form-group">
-            <label for="profileImage">Profile Image:</label>
-            <input
-              type="file"
-              id="profileImage"
-              name="profileImage"
-              accept="image/*"
-            />
-          </div>
-          <footer class="modal__actions">
-            <button type="submit" class="modal__save-btn">Save Changes</button>
-            <button type="button" class="modal__cancel-btn">Cancel</button>
-          </footer>
-        </form>
-      </div>
-    </dialog>
+
+        <!-- Image Card Modal -->
+        <dialog id="imageModal" class="imgModal" aria-modal="true" role="dialog" aria-labelledby="imageModalTitle">
+                <div class="img-content imageModal__content" role="document">
+                    <!-- <span class="close">&times;</span> -->
+                    <button type="button" class="modal__close" aria-label="Close">
+                        &times;
+                    </button>
+                        <img  id="modalImg" class="" src="" alt="" />
+                            <div class="modal__text">
+                                <p ></p>
+                                <img src="" alt="" />
+                            </div>
+                </div>
+                <div class="modal__form-group">
+                    <label for="profileBio">Bio:</label>
+                    <textarea
+                    id="profileBio"
+                    name="profileBio"
+                    rows="4"
+                    required
+                    ></textarea>
+                </div>
+                <div class="modal__form-group">
+                    <label for="profileImage">Profile Image:</label>
+                    <input
+                    type="file"
+                    id="profileImage"
+                    name="profileImage"
+                    accept="image/*"
+                    />
+                </div>
+                <footer class="modal__actions">
+                    <button type="submit" class="modal__save-btn">Save Changes</button>
+                    <button type="button" class="modal__cancel-btn">Cancel</button>
+                </footer>
+            </form>
+            </div>
+        </dialog>
 
 
     <!--  The “New Post” button should have the functionality to post new image, including the title and heart icon using the modal and should be within size fixed for desktop and mobile too. -->
@@ -172,9 +190,9 @@
         </dialog>
 
     <!-- Image Card Modal -->
-    <dialog id="imageModal" class="imgModal">
+    <!-- <dialog id="imageModal" class="imgModal">
       <div class="img-content imageModal__content" role="document">
-        <!-- <span class="close">&times;</span> -->
+        <span class="close">&times;</span>
         <button type="button" class="modal__close">&times;</button>
         <img id="modalImg" class="" src="" alt="" />
         <div class="modal__text">
@@ -182,7 +200,7 @@
           <img src="" alt="" />
         </div>
       </div>
-    </dialog>
+    </dialog> -->
 
     <script type="module" src="index.js"></script>
   </body>
